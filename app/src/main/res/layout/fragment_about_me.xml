@@ -89,10 +89,10 @@
         android:layout_below="@+id/emailMahasiswa"
         android:layout_marginTop="12dp"
         android:layout_toEndOf="@id/txtGithub"
-        android:text="Link Github"
+        android:text="https://github.com/erickwinz30"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGithub" />
 
