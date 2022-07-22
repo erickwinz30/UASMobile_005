@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">UASMobile_005</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fragment_jadwal">Fragment Jadwal</string>
+    <string name="fragment_mk">Fragment MK</string>
+    <string-array name="arr_hari">
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+    </string-array>
+    <string-array name="arr_kelas">
+        <item>M301</item>
+        <item>M302</item>
+        <item>M303</item>
+        <item>B301</item>
+        <item>B302</item>
+        <item>B303</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

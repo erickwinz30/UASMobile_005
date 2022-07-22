@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "764596874108",
+    "project_id": "uas-mobile-fe8bc",
+    "storage_bucket": "uas-mobile-fe8bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764596874108:android:304eaaa756fa672cfe92f9",
+        "android_client_info": {
+          "package_name": "id.undika.uasmobile_005"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764596874108-sqthrdj3p78kskmf6p9m85124ri8gnn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3opAGeXVG4a3YILgZSrIEAGwog-YkRoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764596874108-sqthrdj3p78kskmf6p9m85124ri8gnn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
