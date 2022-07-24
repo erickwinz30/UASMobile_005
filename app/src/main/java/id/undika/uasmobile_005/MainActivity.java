@@ -25,12 +25,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import id.undika.uasmobile_005.adapter.adapterJadwal;
 import id.undika.uasmobile_005.model.modelJadwal;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     private BottomNavigationView navView;
     private List<modelJadwal> list;
+    private adapterJadwal adapterJd;
     Fragment fragmentJadwal, fragmentMK, fragmentMe;
     FragmentTransaction fragTRJadwal, fragTRMK, fragTRMe;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,94 +42,84 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         navView = findViewById(R.id.navBar);
-
-        BottomNavigationView.OnNavigationItemSelectedListener listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        navView.findViewById(R.id.jadwal_hari_ini).post(new Runnable() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                fragmentJadwal = null;
-                fragmentMK = null;
-                fragmentMe = null;
-                fragTRJadwal = null;
-                fragTRMK = null;
-                fragTRMe = null;
-
-                switch (item.getItemId()) {
-                    case R.id.jadwal_hari_ini:
-                        readData(new callbackFB() {
-                            @Override
-                            public void onCallback(List<String> listId, List<String> listNama, List<String> listHari, List<String> listKelas, List<String> listWaktu) {
-                                FragmentJadwal fragmentJadwal = new FragmentJadwal();
-                                fragmentJadwal.listNama.clear();
-                                fragmentJadwal.listWaktu.clear();
-                                fragmentJadwal.listKelas.clear();
-                                fragmentJadwal.listHari.clear();
-
-                                String day = getDate();
-                                Log.d("Hari ini", "Hari : "+day);
-                                for(int i = 0; i < listHari.size(); i++) {
-                                    if(listHari.get(i).equals(day) ) {
-                                        fragmentJadwal.listNama.add(listNama.get(i));
-                                        fragmentJadwal.listHari.add(listHari.get(i));
-                                        fragmentJadwal.listKelas.add(listKelas.get(i));
-                                        fragmentJadwal.listWaktu.add(listWaktu.get(i));
-                                    }
-                                }
-
-                                Date date = new Date();
-                                SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
-                                String strDate = format.format(date);
-                                fragmentJadwal.tanggal = day + ", " + strDate;
-
-                                fragTRJadwal = getSupportFragmentManager().beginTransaction();
-                                fragTRJadwal.replace(R.id.display, fragmentJadwal);
-                                fragTRJadwal.commit();
-
-                            }
-                        });
-                        fragmentJadwal = new FragmentJadwal();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.display, fragmentJadwal, fragmentJadwal.getClass().getSimpleName()).commit();
-                        return true;
-
-                    case R.id.mata_kuliah:
-                        readData(new callbackFB() {
-                            @Override
-                            public void onCallback(List<String> listId, List<String> listNama, List<String> listHari, List<String> listKelas, List<String> listWaktu) {
-                                FragmentMK fragmentMK = new FragmentMK();
-                                fragmentMK.listNama.clear();
-                                fragmentMK.listWaktu.clear();
-                                fragmentMK.listKelas.clear();
-                                fragmentMK.listHari.clear();
-
-                                fragmentMK.listNama.addAll(listNama);
-                                fragmentMK.listHari.addAll(listHari);
-                                fragmentMK.listKelas.addAll(listKelas);
-                                fragmentMK.listWaktu.addAll(listWaktu);
-
-                                fragTRMK = getSupportFragmentManager().beginTransaction();
-                                fragTRMK.replace(R.id.display, fragmentMK);
-                                fragTRMK.commit();
-                            }
-                        });
-                        return true;
-                    case R.id.about_me:
-                        FragmentAboutMe fragmentMe = new FragmentAboutMe();
-                        fragTRMe = getSupportFragmentManager().beginTransaction();
-                        fragTRMe.replace(R.id.display, fragmentMe, fragmentMe.getClass().getSimpleName()).commit();
-                        return true;
-                }
-                return true;
+            public void run() {
+                navView.findViewById(R.id.jadwal_hari_ini).performClick();
             }
-        };
-
-        navView = findViewById(R.id.navBar);
-        navView.setOnNavigationItemSelectedListener(listener);
-        if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.jadwal_hari_ini);
-        }
+        });
 
 
+        navView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.jadwal_hari_ini:
+                    readData(new callbackFB() {
+                        @Override
+                        public void onCallback(List<String> listId, List<String> listNama, List<String> listHari, List<String> listKelas, List<String> listWaktu) {
+                            FragmentJadwal fragmentJadwal = new FragmentJadwal();
+                            fragmentJadwal.listNama.clear();
+                            fragmentJadwal.listWaktu.clear();
+                            fragmentJadwal.listKelas.clear();
+                            fragmentJadwal.listHari.clear();
+
+                            String day = getDate();
+                            Log.d("Hari ini", "Hari : "+day);
+                            for(int i = 0; i < listHari.size(); i++) {
+                                if(listHari.get(i).equals(day) ) {
+                                    fragmentJadwal.listNama.add(listNama.get(i));
+                                    fragmentJadwal.listHari.add(listHari.get(i));
+                                    fragmentJadwal.listKelas.add(listKelas.get(i));
+                                    fragmentJadwal.listWaktu.add(listWaktu.get(i));
+                                }
+                            }
+
+                            Date date = new Date();
+                            SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");
+                            String strDate = format.format(date);
+                            fragmentJadwal.tanggal = day + ", " + strDate;
+
+                            fragTRJadwal = getSupportFragmentManager().beginTransaction();
+                            fragTRJadwal.replace(R.id.display, fragmentJadwal);
+                            fragTRJadwal.commit();
+
+                        }
+                    });
+//                        fragmentJadwal = new FragmentJadwal();
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.display, fragmentJadwal, fragmentJadwal.getClass().getSimpleName()).commit();
+                    break;
+
+                case R.id.mata_kuliah:
+                    readData(new callbackFB() {
+                        @Override
+                        public void onCallback(List<String> listId, List<String> listNama, List<String> listHari, List<String> listKelas, List<String> listWaktu) {
+                            FragmentMK fragmentMK = new FragmentMK();
+                            fragmentMK.listNama.clear();
+                            fragmentMK.listWaktu.clear();
+                            fragmentMK.listKelas.clear();
+                            fragmentMK.listHari.clear();
+                            fragmentMK.listId.clear();
+
+                            fragmentMK.listNama.addAll(listNama);
+                            fragmentMK.listHari.addAll(listHari);
+                            fragmentMK.listKelas.addAll(listKelas);
+                            fragmentMK.listWaktu.addAll(listWaktu);
+                            fragmentMK.listId.addAll(listId);
+
+                            fragTRMK = getSupportFragmentManager().beginTransaction();
+                            fragTRMK.replace(R.id.display, fragmentMK);
+                            fragTRMK.commit();
+                        }
+                    });
+                    break;
+                case R.id.about_me:
+                    FragmentAboutMe fragmentMe = new FragmentAboutMe();
+                    fragTRMe = getSupportFragmentManager().beginTransaction();
+                    fragTRMe.replace(R.id.display, fragmentMe, fragmentMe.getClass().getSimpleName()).commit();
+                    break;
+            }
+            return true;
+        });
     }
 
     public boolean onCreateOptionMenu(Menu menu) {

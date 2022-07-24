@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Document;
-
 import id.undika.uasmobile_005.model.modelJadwal;
 
 public class UpdateDeleteActivity extends AppCompatActivity {
@@ -60,7 +58,7 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btnDelete);
 
         btnDelete.setOnClickListener(view -> {
-            db.collection("jadwal").document(jm.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            db.collection("jadwal").document(jm.getId_Doc()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     finish();
@@ -71,17 +69,17 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                     Log.d("Error", "Failure" + e);
                 }
             });
-            Toast.makeText(this, "ID" + jm.getId() + "Deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ID" + jm.getId_Doc() + "Deleted", Toast.LENGTH_SHORT).show();
         });
 
         btnUpdate.setOnClickListener(view -> {
-            DocumentReference documentReference = db.collection("jadwal").document(jm.getId());
+            DocumentReference documentReference = db.collection("jadwal").document(jm.getId_Doc());
             documentReference.update("namaMK", namaMK.getText().toString());
             documentReference.update("waktuMK", waktuMK.getText().toString());
             documentReference.update("hariMK", hariMK.getSelectedItem().toString());
             documentReference.update("kelasMK", kelasMK.getSelectedItem().toString());
 
-            Toast.makeText(this, "ID : " + jm.getId()+ " Updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ID : " + jm.getId_Doc()+ " Updated", Toast.LENGTH_SHORT).show();
         });
     }
 }

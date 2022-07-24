@@ -24,10 +24,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import id.undika.uasmobile_005.model.modelJadwal;
+
 public class InputMK extends AppCompatActivity {
     EditText namaMK, waktuMK;
     Button submit;
     Spinner spHari, spKelas;
+    private modelJadwal jm;
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -46,7 +49,9 @@ public class InputMK extends AppCompatActivity {
 
         submit.setOnClickListener(view -> {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference documentReference = db.collection("jadwal").document();
             Map<String, Object> dataMK = new HashMap<>();
+            dataMK.put("idMK", documentReference.getId());
             dataMK.put("namaMK", namaMK.getText().toString());
             dataMK.put("waktuMK", waktuMK.getText().toString());
             dataMK.put("hariMK", spHari.getSelectedItem().toString());
@@ -61,7 +66,7 @@ public class InputMK extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(InputMK.this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InputMK.this, "Error" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         });

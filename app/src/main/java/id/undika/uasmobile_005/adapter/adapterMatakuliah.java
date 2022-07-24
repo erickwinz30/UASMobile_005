@@ -90,7 +90,7 @@ public class adapterMatakuliah extends RecyclerView.Adapter<adapterMatakuliah.Vi
                     jm.setHariMK(jm.getHariMK());
                     jm.setKelas(jm.getKelas());
                     jm.setWaktuMK(jm.getWaktuMK());
-                    jm.setId(jm.getId());
+                    jm.setId_Doc(jm.getId_Doc());
 
                     Intent detailIntent = new Intent(itemView.getContext(), UpdateDeleteActivity.class);
                     detailIntent.putExtra(UpdateDeleteActivity.EXTRA_MATKUL, jm);

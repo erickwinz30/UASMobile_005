@@ -101,7 +101,7 @@ public class FragmentMK extends Fragment {
             jm.setWaktuMK(waktuMK[i]);
             jm.setKelas(kelasMK[i]);
             jm.setHariMK(hariMK[i]);
-            jm.setId(idMK[i]);
+            jm.setId_Doc(idMK[i]);
             listJadwal.add(jm);
         }
         return listJadwal;

@@ -54,7 +54,6 @@ public class adapterJadwal extends RecyclerView.Adapter<adapterJadwal.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull adapterJadwal.ViewHolder holder, int position) {
         modelJadwal j = listJadwal.get(position);
-
         holder.outputNamaMK.setText(j.getNamaMK());
         holder.outputJamMK.setText(j.getWaktuMK());
         holder.outputHariMK.setText(j.getHariMK());
@@ -84,7 +83,7 @@ public class adapterJadwal extends RecyclerView.Adapter<adapterJadwal.ViewHolder
                     jm.setHariMK(jm.getHariMK());
                     jm.setKelas(jm.getKelas());
                     jm.setWaktuMK(jm.getWaktuMK());
-                    jm.setId(jm.getId());
+                    jm.setId_Doc(jm.getId_Doc());
 
                     Intent detailIntent = new Intent(itemView.getContext(), UpdateDeleteActivity.class);
                     detailIntent.putExtra(UpdateDeleteActivity.EXTRA_MATKUL, jm);

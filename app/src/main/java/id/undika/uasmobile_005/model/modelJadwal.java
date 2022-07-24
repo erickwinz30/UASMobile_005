@@ -13,12 +13,12 @@ public class modelJadwal implements Parcelable {
     public modelJadwal() {
     }
 
-    protected modelJadwal(Parcel parcel) {
-        namaMK = parcel.readString();
-        waktuMK = parcel.readString();
-        hariMK = parcel.readString();
-        kelas = parcel.readString();
-        idDoc = parcel.readString();
+    public modelJadwal(Parcel parcel) {
+        this.namaMK = parcel.readString();
+        this.waktuMK = parcel.readString();
+        this.hariMK = parcel.readString();
+        this.kelas = parcel.readString();
+        this.idDoc = parcel.readString();
     }
 
     public static final Creator<modelJadwal> CREATOR = new Creator<modelJadwal>() {
@@ -33,12 +33,11 @@ public class modelJadwal implements Parcelable {
         }
     };
 
-    public String getId() {
-        DocumentReference newID = db.collection("mahasiswa").document();
-        return newID.toString();
+    public String getId_Doc() {
+        return idDoc;
     }
 
-    public void setId(String idDoc) {
+    public void setId_Doc(String idDoc) {
         this.idDoc = idDoc;
     }
 
